@@ -2,17 +2,16 @@ import psycopg2
 from datetime import date, timedelta
 import random
 
-# ---- DB CONNECTION ----
 conn = psycopg2.connect(
     host="localhost",
     dbname="retail_bi",
-    user="postgres",       # change if your pgAdmin user is different
-    password="Akku@2003",  # replace with your actual password
+    user="postgres",
+    password="Akku@2003",
     port=5432
 )
 cur = conn.cursor()
 
-# ---- 1. STORES: 8 stores across 5 southern states ----
+# 1. STORES: 8 stores across 5 southern states
 stores = [
     ("Croma Kochi",       "Kerala",         "Kochi"),
     ("Croma Trivandrum",  "Kerala",         "Trivandrum"),
@@ -38,7 +37,7 @@ for name, region, city in stores:
     )
     store_ids.append(cur.fetchone()[0])
 
-# ---- 2. PRODUCTS: 15 products across 5 categories ----
+# 2. PRODUCTS: 15 products across 5 categories
 products = [
     ("Samsung Galaxy A54", "Mobiles", 32999),
     ("iPhone 13", "Mobiles", 54999),
@@ -65,11 +64,11 @@ for name, category, price in products:
     )
     product_ids.append((cur.fetchone()[0], category, price))
 
-# ---- 3. CUSTOMERS: segments ----
+#  3. CUSTOMERS: segments
 segments = ["Retail", "Corporate", "Online"]
 customer_ids = []
 for seg in segments:
-    for _ in range(20):  # 20 dummy customers per segment = 60 total
+    for _ in range(20):
         cur.execute(
             "INSERT INTO customers (customer_segment) VALUES (%s) RETURNING customer_id",
             (seg,)
@@ -79,13 +78,13 @@ for seg in segments:
 conn.commit()
 print("Stores, products, customers loaded.")
 
-# ---- 4. SALES: 2 years daily, with seasonality ----
+# 4. SALES: 2 years daily, with seasonality
 start_date = date(2024, 1, 1)
 end_date = date(2025, 12, 31)
 current = start_date
 
 def seasonality_multiplier(d):
-    # Diwali roughly Oct-Nov, New Year Dec-Jan -> spike
+    # Diwali Oct-Nov, New Year Dec-Jan -> spike
     if d.month in (10, 11):
         return 2.2   # Diwali season
     elif d.month == 12 or d.month == 1:
