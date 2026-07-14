@@ -1,0 +1,23 @@
+Run at 2026-07-14 14:39:12
+Checking sales for 2025-11-09
+Method 1 - same weekday, last 4 weeks average
+Croma Hyderabad: 1,740,369.39 vs avg 2,642,780.03 (-34.1%)
+Croma Vizag: 1,790,816.01 vs avg 2,717,214.44 (-34.1%)
+Method 2 - same day last week (2025-11-02)
+Croma Vizag: 1,790,816.01 vs last week 2,815,045.57 (-36.4%)
+----------------------------------------
+Run at 2026-07-14 14:48:21
+Checking sales for 2024-06-14
+Method 1 - same weekday, last 4 weeks average
+Croma Chennai: 460,184.35 vs avg 722,825.46 (-36.3%)
+Method 2 - same day last week (2024-06-07)
+Croma Chennai: 460,184.35 vs last week 859,691.01 (-46.5%)
+----------------------------------------
+Run at 2026-07-14 14:48:21
+Checking sales for 2025-11-09
+Method 1 - same weekday, last 4 weeks average
+Croma Hyderabad: 1,740,369.39 vs avg 2,642,780.03 (-34.1%)
+Croma Vizag: 1,790,816.01 vs avg 2,717,214.44 (-34.1%)
+Method 2 - same day last week (2025-11-02)
+Croma Vizag: 1,790,816.01 vs last week 2,815,045.57 (-36.4%)
+----------------------------------------

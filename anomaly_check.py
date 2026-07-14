@@ -12,7 +12,6 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 # get the date to check from the command line, e.g. python3 anomaly_check.py 2024-06-15
-# if nothing is typed, default to a fallback date so the script still runs
 if len(sys.argv) > 1:
     simulated_today = datetime.strptime(sys.argv[1], "%Y-%m-%d").date()
 else:
@@ -22,6 +21,10 @@ else:
 yesterday = simulated_today - timedelta(days=1)
 
 THRESHOLD = 0.30  # flag if sales dropped more than 30%
+
+log_lines = []
+log_lines.append(f"Run at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+log_lines.append(f"Checking sales for {yesterday}")
 
 print(f"Checking sales for {yesterday}")
 
@@ -71,18 +74,34 @@ for store_id, store_name in all_stores:
             anomalies_method2.append((store_name, yesterday_revenue, last_week_revenue, pct_change_2))
 
 print("\nMethod 1 - same weekday, last 4 weeks average")
+log_lines.append("Method 1 - same weekday, last 4 weeks average")
 if anomalies_method1:
     for name, yest, avg, pct in anomalies_method1:
-        print(f"{name}: {yest:,.2f} vs avg {avg:,.2f} ({pct*100:.1f}%)")
+        line = f"{name}: {yest:,.2f} vs avg {avg:,.2f} ({pct*100:.1f}%)"
+        print(line)
+        log_lines.append(line)
 else:
     print("no anomalies")
+    log_lines.append("no anomalies")
 
 print(f"\nMethod 2 - same day last week ({last_week_same_day})")
+log_lines.append(f"Method 2 - same day last week ({last_week_same_day})")
 if anomalies_method2:
     for name, yest, last_wk, pct in anomalies_method2:
-        print(f"{name}: {yest:,.2f} vs last week {last_wk:,.2f} ({pct*100:.1f}%)")
+        line = f"{name}: {yest:,.2f} vs last week {last_wk:,.2f} ({pct*100:.1f}%)"
+        print(line)
+        log_lines.append(line)
 else:
     print("no anomalies")
+    log_lines.append("no anomalies")
+
+log_lines.append("-" * 40)
+
+with open("anomaly_log.txt", "a") as f:
+    for line in log_lines:
+        f.write(line + "\n")
+
+print("\nResults saved to anomaly_log.txt")
 
 cur.close()
 conn.close()
