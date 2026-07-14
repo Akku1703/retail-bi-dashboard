@@ -2,7 +2,7 @@ import psycopg2
 from datetime import date, timedelta
 import random
 
-# ---- DB CONNECTION ----
+#  DB CONNECTION ----
 conn = psycopg2.connect(
     host="localhost",
     dbname="retail_bi",
