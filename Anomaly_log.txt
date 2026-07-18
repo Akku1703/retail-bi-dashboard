@@ -21,3 +21,13 @@ Croma Vizag: 1,790,816.01 vs avg 2,717,214.44 (-34.1%)
 Method 2 - same day last week (2025-11-02)
 Croma Vizag: 1,790,816.01 vs last week 2,815,045.57 (-36.4%)
 ----------------------------------------
+Anomaly check run at 2026-07-18 16:20:12
+Checking sales for 2026-07-17
+
+Method 1 - same weekday, last 4 weeks average
+Croma Trivandrum: 432,198.56 vs avg 690,975.27 (-37.5%)
+
+Method 2 - same day last week (2026-07-10)
+Croma Trivandrum: 432,198.56 vs last week 769,742.33 (-43.9%)
+Croma Vizag: 459,240.74 vs last week 723,238.53 (-36.5%)
+----------------------------------------

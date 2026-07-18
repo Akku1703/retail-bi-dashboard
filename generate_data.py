@@ -172,7 +172,7 @@ product_unit_multiplier = {
 }
 
 start_date = date(2024, 1, 1)
-end_date = date(2025, 12, 31)
+end_date = date.today()
 current = start_date
 
 rows_inserted = 0
